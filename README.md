@@ -1,8 +1,7 @@
 flaudit
 -------
 
-a lustre changelog consumer that can leverage fluentbit to send out data
-originally based on https://github.com/stanford-rc/lauditd
+`flaudit` reads Lustre Changelogs using liblustreapi and write output in json. Based on [lauditd](https://github.com/stanford-rc/lauditd)
 
 
 Installation
@@ -13,10 +12,8 @@ copy flaudit directory in `/opt/ddn/`
 Output format
 -------------
 
-`flaudit` reads Lustre Changelogs from Lustre directly using the liblustreapi
-and write outputs in json, this allows fluent bit (https://fluentbit.io/) to receive data through "stdin" plugin and send out data through its output plugins https://docs.fluentbit.io/manual/pipeline/outputs.
-
-this solution is suitable to send out data to several collection tools like elasticsearch (https://www.elastic.co/)
+`flaudit` can be used in conjunction with [fluent-bit](https://fluentbit.io/) to send data through its [output plugins](https://docs.fluentbit.io/manual/pipeline/outputs).
+this solution is suitable to send out data to several collection tools like [elasticsearch](https://www.elastic.co/)
 
 
 Running flaudit
