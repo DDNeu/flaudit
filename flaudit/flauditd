@@ -1,0 +1,11 @@
+#!/bin/bash 
+if [[ $# -eq 0 ]] ; then
+    echo 'usage $0 username fsname-mdtnumber; ie $0 cl3-audit exafs-MDT0000'
+    exit 0
+fi
+
+BINDIR=/opt/ddn/flaudit
+MDT=$2
+USER=$1
+FSNAME=$(echo $MDT|cut -d"-" -f1)
+$BINDIR/lauditd -u "$USER" "$MDT" | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf

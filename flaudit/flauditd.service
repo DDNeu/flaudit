@@ -1,0 +1,19 @@
+[Unit]
+Description=Log lustre changelog entries and send them to elasticsearch
+Requires=lustre-exafs-client.mount
+Requires=elasticsearch.service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=90
+StartLimitInterval=400
+StartLimitBurst=3
+ExecStart=/opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=flaudit
+
+[Install]
+WantedBy=multi-user.target
