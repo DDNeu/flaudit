@@ -12,7 +12,7 @@ a binary package is already available in flaudit directory with all relevant fil
 copy flaudit directory in `/opt/ddn/` 
 ```
 $ mkdir -p /opt/ddn/
-$ cp -a flauditd /opt/ddn/
+$ cp -a flaudit /opt/ddn/
 ```
 and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
 
@@ -21,7 +21,7 @@ and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
 Building binary:
 
 ```
-$ sh ./autogen.sh
+$ ./autogen.sh
 $ ./configure
 $ make
 ```
