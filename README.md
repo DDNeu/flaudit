@@ -29,7 +29,7 @@ copy flaudit directory in `/opt/ddn/` and copy newly compiled `flaudit` binary f
 
 ```
 $ mkdir -p /opt/ddn/
-$ cp -a flauditd /opt/ddn/
+$ cp -a flaudit /opt/ddn/
 $ cp src/flaudit/flaudit /opt/ddn/flaudit/flaudit
 ```
 
