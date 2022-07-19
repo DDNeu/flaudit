@@ -7,7 +7,31 @@ flaudit
 Installation
 ------------
 
-copy flaudit directory in `/opt/ddn/`
+#### Binary:
+a binary package is already available in flaudit directory with all relevant files.
+copy flaudit directory in `/opt/ddn/` 
+```
+$ mkdir -p /opt/ddn/
+$ cp -a flauditd /opt/ddn/
+```
+and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
+
+#### Source:
+
+Building binary:
+
+```
+$ sh ./autogen.sh
+$ ./configure
+$ make
+```
+copy flaudit directory in `/opt/ddn/` and copy newly compiled `flaudit` binary from `src/flaudit/` to `/opt/ddn/flaudit/`
+
+```
+$ mkdir -p /opt/ddn/
+$ cp -a flauditd /opt/ddn/
+$ cp src/flaudit/flaudit /opt/ddn/flaudit/flaudit
+```
 
 Output format
 -------------
@@ -22,7 +46,7 @@ Running flaudit
 `flaudit` doesn't need any configuration file as it takes all its parameters from
 command line. One flaudit process should be used per Lustre MDT. You will need
 to set up a Changelog reader ID dedicated to `flaudit`.
-Keep in mind changelog performance impact, see: https://doc.lustre.org/lustre_manual.xhtml#lustre_changelogs
+Keep in mind changelog performance impact, see [Official Lustre Manual Changelog section](https://doc.lustre.org/lustre_manual.xhtml#lustre_changelogs)
 
 In this example lustre filesystem `exafs` has only one mdt `MDT0000`.
 
