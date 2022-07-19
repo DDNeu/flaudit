@@ -80,7 +80,7 @@ Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
 requires fluent-bit and a working elastic stack. In this example lustre client has all the software installed locally:
 
 - fluent-bit
-- elasticsearch listen on localhost with ssl (default installation)
+- elasticsearch listen on localhost:9200 with ssl (default installation)
 - kibana listening on 0.0.0.0:443
 
 ## ElasticSearch configuration
