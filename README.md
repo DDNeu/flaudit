@@ -81,8 +81,8 @@ requires fluent-bit and a working elastic stack. In this example all the softwar
 
 - lsutre client with lustreapi, assuming lustre filesystem is mounted
 - fluent-bit
-- elasticsearch listening on localhost:9200 with ssl (default installation)
-- kibana listening on 0.0.0.0:443 (see [this post](https://discuss.elastic.co/t/how-to-use-port-443-to-access-kibana/266757/2) to allow unprivileged user binding on port 443
+- elasticsearch listening on localhost:9200 with ssl ([default RPM installation](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html))
+- kibana listening on 0.0.0.0:443 ([default RPM installation](https://www.elastic.co/guide/en/kibana/current/rpm.html), see [this post](https://discuss.elastic.co/t/how-to-use-port-443-to-access-kibana/266757/2) to allow kibana user bind on port 443)
 
 ## ElasticSearch configuration
 
