@@ -80,7 +80,7 @@ Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
 requires fluent-bit and a working elastic stack. In this example all the software is installed locally:
 
 - lsutre client with lustreapi, assuming lustre filesystem is mounted
-- fluent-bit
+- fluent-bit ([default RPM installation](https://docs.fluentbit.io/manual/installation/linux/redhat-centos))
 - elasticsearch listening on localhost:9200 with ssl ([default RPM installation](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html))
 - kibana listening on 0.0.0.0:443 ([default RPM installation](https://www.elastic.co/guide/en/kibana/current/rpm.html), see [this post](https://discuss.elastic.co/t/how-to-use-port-443-to-access-kibana/266757/2) to allow kibana user bind on port 443)
 
