@@ -1,7 +1,7 @@
 flaudit
 -------
 
-`flaudit` reads Lustre Changelogs using liblustreapi and write output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
+`flaudit` consumes Lustre Changelogs using liblustreapi and write output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
 
 
 Installation
