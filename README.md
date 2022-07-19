@@ -77,20 +77,21 @@ $ /opt/ddn/flaudit/flaudit -u cl3-audit exafs-MDT0000
 Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
 -----------------------------------------------
 
-requires fluent-bit and a working elastic stack. In this example lustre client has all the software installed locally:
+requires fluent-bit and a working elastic stack. In this example all the software is installed locally:
 
+- lsutre client with lustreapi, assuming lustre filesystem is mounted
 - fluent-bit
-- elasticsearch listen on localhost:9200 with ssl (default installation)
+- elasticsearch listening on localhost:9200 with ssl (default installation)
 - kibana listening on 0.0.0.0:443
 
 ## ElasticSearch configuration
 
-- an index `lustre-changelog-exafs` is created
-- a simple `fluentbit` user is created, with `all` privileges for index `lustre-changelog-*`
+- index `lustre-changelog-exafs` is created
+- `fluentbit` user is created, with `all` privileges for index `lustre-changelog-*`
 
 ## fluent-bit configuration
 
-you can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.conf` adjusting relevant output section:
+You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.conf` adjusting relevant output section:
 
 ```
 [INPUT]
