@@ -12,7 +12,7 @@ a binary package is already available in flaudit directory with all relevant fil
 copy flaudit directory in `/opt/ddn/` 
 ```
 $ mkdir -p /opt/ddn/
-$ cp -a flauditd /opt/ddn/
+$ cp -a flaudit /opt/ddn/
 ```
 and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
 
@@ -21,7 +21,7 @@ and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
 Building binary:
 
 ```
-$ sh ./autogen.sh
+$ ./autogen.sh
 $ ./configure
 $ make
 ```
@@ -29,8 +29,8 @@ copy flaudit directory in `/opt/ddn/` and copy newly compiled `flaudit` binary f
 
 ```
 $ mkdir -p /opt/ddn/
-$ cp -a flauditd /opt/ddn/
-$ cp src/flaudit/flaudit /opt/ddn/flaudit/flaudit
+$ cp -a flaudit /opt/ddn/
+$ cp -a src/flaudit/flaudit /opt/ddn/flaudit/flaudit
 ```
 
 Output format
@@ -71,26 +71,27 @@ already mounted (read-only is supported).
 ###### Run `flaudit` alone (using standard output)
 
 ```
-$ flaudit -u cl3-audit exafs-MDT0000
+$ /opt/ddn/flaudit/flaudit -u cl3-audit exafs-MDT0000
 ```
 
 Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
 -----------------------------------------------
 
-requires fluent-bit and a working elastic stack. In this example lustre client has all the software installed locally:
+requires fluent-bit and a working elastic stack. In this example all the software is installed locally:
 
+- lsutre client with lustreapi, assuming lustre filesystem is mounted
 - fluent-bit
-- elasticsearch listen on localhost with ssl (default installation)
+- elasticsearch listening on localhost:9200 with ssl (default installation)
 - kibana listening on 0.0.0.0:443
 
 ## ElasticSearch configuration
 
-- an index `lustre-changelog-exafs` is created
-- a simple `fluentbit` user is created, with `all` privileges for index `lustre-changelog-*`
+- index `lustre-changelog-exafs` is created
+- `fluentbit` user is created, with `all` privileges for index `lustre-changelog-*`
 
 ## fluent-bit configuration
 
-you can use fluent-bit provided configuration file adjusting relevant output section:
+You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.conf` adjusting relevant output section:
 
 ```
 [INPUT]
@@ -114,13 +115,13 @@ NOTE:
 `host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation. `Suppress_Type_Name` must be set to `on` for current elasticsearch version.
 
 ## launch flauditd
-you can use the provided wrapper script `flauditd` 
+you can use the provided wrapper script `/opt/ddn/flaudit/flauditd`
 
 ```
-flauditd cl3-audit exafs-MDT0000
+/opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
 ```
 
-For Linux systems using systemd, you can edit the service unit file provided and copy to `/etc/sysconfig/flauditd`
+For Linux systems using systemd, you can edit the provided service unit file `/opt/ddn/flaudit/flauditd.service` and then copy it to `/etc/sysconfig/`
 
 ```
 $ cp /opt/ddn/flaudit/flauditd.service /etc/systemd/system/flauditd.service
