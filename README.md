@@ -40,7 +40,7 @@ Output format
 this solution is suitable to send out data to several collection tools like [elasticsearch](https://www.elastic.co/)
 
 
-Running flaudit
+Running `flaudit`
 ---------------
 
 `flaudit` doesn't need any configuration file as it takes all its parameters from
@@ -121,6 +121,7 @@ you can use the provided wrapper script `/opt/ddn/flaudit/flauditd`
 /opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
 ```
 
+## launch flauditd with systemd
 For Linux systems using systemd, you can edit the provided service unit file `/opt/ddn/flaudit/flauditd.service` and then copy it to `/etc/sysconfig/`
 
 ```
