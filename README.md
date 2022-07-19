@@ -30,7 +30,7 @@ copy flaudit directory in `/opt/ddn/` and copy newly compiled `flaudit` binary f
 ```
 $ mkdir -p /opt/ddn/
 $ cp -a flaudit /opt/ddn/
-$ cp src/flaudit/flaudit /opt/ddn/flaudit/flaudit
+$ cp -a src/flaudit/flaudit /opt/ddn/flaudit/flaudit
 ```
 
 Output format
@@ -90,7 +90,7 @@ requires fluent-bit and a working elastic stack. In this example lustre client h
 
 ## fluent-bit configuration
 
-you can use fluent-bit provided configuration file adjusting relevant output section:
+you can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.conf` adjusting relevant output section:
 
 ```
 [INPUT]
@@ -114,13 +114,13 @@ NOTE:
 `host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation. `Suppress_Type_Name` must be set to `on` for current elasticsearch version.
 
 ## launch flauditd
-you can use the provided wrapper script `flauditd` 
+you can use the provided wrapper script `/opt/ddn/flaudit/flauditd`
 
 ```
-flauditd cl3-audit exafs-MDT0000
+/opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
 ```
 
-For Linux systems using systemd, you can edit the service unit file provided and copy to `/etc/sysconfig/flauditd`
+For Linux systems using systemd, you can edit the provided service unit file `/opt/ddn/flaudit/flauditd.service` and then copy it to `/etc/sysconfig/`
 
 ```
 $ cp /opt/ddn/flaudit/flauditd.service /etc/systemd/system/flauditd.service
