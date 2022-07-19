@@ -71,7 +71,7 @@ already mounted (read-only is supported).
 ###### Run `flaudit` alone (using standard output)
 
 ```
-$ flaudit -u cl3-audit exafs-MDT0000
+$ /opt/ddn/flaudit/flaudit -u cl3-audit exafs-MDT0000
 ```
 
 Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
