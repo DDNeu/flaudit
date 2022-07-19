@@ -8,11 +8,7 @@ originally based on https://github.com/stanford-rc/lauditd
 Installation
 ------------
 
-```
-$ sh ./autogen.sh
-$ ./configure
-$ make
-```
+copy flaudit directory in `/opt/ddn/`
 
 Output format
 -------------
@@ -103,13 +99,12 @@ you can use the provided wrapper script `flauditd`
 flauditd cl3-audit exafs-MDT0000
 ```
 
-For Linux systems using systemd, you can use the service unit file provided with
-configuration file and copy to `/etc/sysconfig/flauditd`, then issue
+For Linux systems using systemd, you can edit the service unit file provided and copy to `/etc/sysconfig/flauditd`
 
 ```
+$ cp /opt/ddn/flaudit/flauditd.service /etc/systemd/system/flauditd.service
 $ systemctl daemon-reload
 ```
-
 To start `flauditd`, use:
 
 ```
