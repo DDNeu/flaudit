@@ -1,7 +1,7 @@
 flaudit
 -------
 
-`flaudit` reads Lustre Changelogs using liblustreapi and write output in json. Based on [lauditd](https://github.com/stanford-rc/lauditd)
+`flaudit` reads Lustre Changelogs using liblustreapi and write output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
 
 
 Installation
@@ -112,9 +112,11 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
 ```
 
 NOTE:
-`host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation. `Suppress_Type_Name` must be set to `on` for current elasticsearch version.
+`host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation.
+`Suppress_Type_Name` must be set to on ([documentation](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#action-metadata-contains-an-unknown-parameter-type)) for elasticsearch version > 8.
+`Id_Key` is elasticsearch Index primary key and [must be provided] (https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#validation-failed-1-an-id-must-be-provided-if-version-type-or-value-are-set), is conveniently set as Lustre Changelog `id`
 
-## launch flauditd
+## Launch `flauditd`
 you can use the provided wrapper script `/opt/ddn/flaudit/flauditd`
 
 ```
