@@ -1,15 +1,16 @@
 flaudit
 -------
 
-`flaudit` consumes Lustre Changelogs using liblustreapi and write output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
+`flaudit` consumes Lustre Changelogs using liblustreapi and writes output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
 
 
 Installation
 ------------
 
 #### Binary:
-a binary package is already available in flaudit directory with all relevant files.
-copy flaudit directory in `/opt/ddn/` 
+a binary package is already available in `flaudit` directory with all relevant files.
+
+Copy `flaudit` directory in `/opt/ddn/` 
 ```
 $ mkdir -p /opt/ddn/
 $ cp -a flaudit /opt/ddn/
@@ -78,7 +79,7 @@ Run `flaudit` daemon `flauditd` with fluent-bit and elasticsearch
 
 requires fluent-bit and a working elastic stack. In this example all the software is installed locally:
 
-- lustre client with lustreapi, assuming lustre filesystem is mounted (either r/w or r/o)
+- lustre client with lustreapi, assuming lustre filesystem is mounted (either  `rw` or `ro`)
 - fluent-bit ([default RPM installation](https://docs.fluentbit.io/manual/installation/linux/redhat-centos))
 - elasticsearch listening on localhost:9200 with ssl ([default RPM installation](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html))
 - kibana listening on 0.0.0.0:443 ([default RPM installation](https://www.elastic.co/guide/en/kibana/current/rpm.html), see [this post](https://discuss.elastic.co/t/how-to-use-port-443-to-access-kibana/266757/2) to allow kibana user to bind on port 443)
@@ -113,7 +114,7 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
 
 #### NOTE
 - `host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation.
-- `Suppress_Type_Name` must be set to on ([documentation](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#action-metadata-contains-an-unknown-parameter-type)) for elasticsearch version > 8.
+- `Suppress_Type_Name` must be set to `on` for elasticsearch version > 8 ([documentation](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#action-metadata-contains-an-unknown-parameter-type)).
 - `Id_Key` is elasticsearch Index primary key and [must be provided](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#validation-failed-1-an-id-must-be-provided-if-version-type-or-value-are-set), so is conveniently set as Lustre Changelog ID
 
 ## Launch `flauditd`
