@@ -39,7 +39,6 @@ Output format
 `flaudit` can be used in conjunction with [fluent-bit](https://fluentbit.io/) to send data through its [output plugins](https://docs.fluentbit.io/manual/pipeline/outputs).
 this solution is suitable to send out data to several collection tools like [elasticsearch](https://www.elastic.co/)
 
-
 Running `flaudit`
 ---------------
 
@@ -95,7 +94,8 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
 
 ```
 [INPUT]
-    name  stdin
+    Name  stdin
+    Match *
 
 [OUTPUT]
     Name es
@@ -141,3 +141,9 @@ To enable `flauditd` at boot time, use:
 ```
 $ systemctl enable flauditd
 ```
+
+Development
+---------------
+- `flaudit` writes its output in a JSON format compatible with `fluent-bit` stdin input plugin. Could be useful to write data also in a more human-readable format and create standard "flat" logfiles as an option.
+- In order to send data to Elasticsearch, `flaudit` is tightly coupled with `fluent-bit`. This is not a bad thing per se, but it means that a `flauditd` wrapper daemon instance must be run for each Lustre MDT.
+integrating flaudit as a fluent-bit input plugin will allow to use either a single fluent-bit daemon with several `flaudit` input worker threads (one per MDT), or more than one fluent-bit daemon, or a combination of the two.
