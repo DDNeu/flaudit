@@ -117,7 +117,9 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
 - `Id_Key` is elasticsearch Index primary key and [must be provided](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#validation-failed-1-an-id-must-be-provided-if-version-type-or-value-are-set), so is conveniently set as Lustre Changelog ID
 
 ## Launch `flauditd`
-you can use the provided wrapper script `/opt/ddn/flaudit/flauditd`
+
+you can use the provided wrapper script `/opt/ddn/flaudit/flauditd` that uses above configuration file for Fluent-bit.
+- NOTE: In /opt/ddn/flaudit/ there is a `fluent-bit` symbolic link pointing the default FLuent-bit installation path (/opt/fluent-bit/)
 
 ```
 /opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
