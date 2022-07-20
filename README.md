@@ -119,13 +119,13 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
 ## Launch `flauditd`
 
 you can use the provided wrapper script `/opt/ddn/flaudit/flauditd` that uses above configuration file for Fluent-bit.
-- NOTE: In /opt/ddn/flaudit/ there is a `fluent-bit` symbolic link pointing the default FLuent-bit installation path (/opt/fluent-bit/)
+- NOTE: In /opt/ddn/flaudit/ there is a `fluent-bit` symbolic link pointing the default Fluent-bit installation path (/opt/fluent-bit/)
 
 ```
 /opt/ddn/flaudit/flauditd cl3-audit exafs-MDT0000
 ```
 
-## launch flauditd with systemd
+## launch `flauditd` via systemd
 For Linux systems using systemd, you can edit the provided service unit file `/opt/ddn/flaudit/flauditd.service` and then copy it to `/etc/sysconfig/`
 
 ```
