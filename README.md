@@ -51,12 +51,12 @@ In this example lustre filesystem `exafs` has only one mdt `MDT0000`.
 
 #### On the MDS:
 
-###### create a changelog mask suitable for your needs
+create a changelog mask suitable for your needs
 ```
 lctl set_param mdd.exafs-MDT0000.changelog_mask="CREAT MKDIR HLINK SLINK MKNOD UNLNK RMDIR RENME RNMTO CLOSE LYOUT TRUNC SATTR XATTR HSM MTIME CTIME MIGRT FLRW RESYNC"
 ```
 
-###### register a changelog user 
+register a changelog user 
 ```
 $ lctl --device exafs-MDT0000 changelog_register audit
 exafs-MDT0000: Registered changelog userid 'cl3-audit'
@@ -67,7 +67,7 @@ exafs-MDT0000: Registered changelog userid 'cl3-audit'
 `flaudit` should be run on a Lustre client with the filesystem you want to audit
 already mounted (read-only is supported). 
 
-###### Run `flaudit` alone (using standard output)
+Run `flaudit` alone (using standard output)
 
 ```
 $ /opt/ddn/flaudit/flaudit -u cl3-audit exafs-MDT0000
@@ -111,7 +111,7 @@ You can use fluent-bit provided configuration file `/opt/ddn/flaudit/fluent-bit.
     Index lustre-changelog-exafs
 ```
 
-###### NOTE
+#### NOTE
 - `host`,`port`,`tls`,`tls.verify` are relevant for default elasticsearch installation.
 - `Suppress_Type_Name` must be set to on ([documentation](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#action-metadata-contains-an-unknown-parameter-type)) for elasticsearch version > 8.
 - `Id_Key` is elasticsearch Index primary key and [must be provided](https://docs.fluentbit.io/manual/pipeline/outputs/elasticsearch#validation-failed-1-an-id-must-be-provided-if-version-type-or-value-are-set), so is conveniently set as Lustre Changelog ID
