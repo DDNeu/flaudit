@@ -71,6 +71,7 @@ static void fid2path(const char *fsname, struct lu_fid *lu_fid, char *path)
 		char fid[32];
 		// COLAVINCENZO lnktmp should be 0
 		int lnktmp = -1;
+		// COLAVINCENZO rectmp should be changelog record number rec->cr_index type unsigned long long 
 		long long rectmp = -1;	
 		sprintf(fid, DFID, PFID(lu_fid));
  		llapi_fid2path(fsname, fid, path, 4096, &rectmp, &lnktmp);
