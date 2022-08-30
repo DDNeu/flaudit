@@ -68,8 +68,9 @@ static void flaudit_sigterm(int signo)
 // COLAVINCENZO fid2path to be checked
 static void fid2path(const char *fsname, struct lu_fid *lu_fid, char *path)
 {
-		char fid[32]; 
-        int lnktmp = -1;
+		char fid[32];
+		// COLAVINCENZO lnktmp should be 0
+		int lnktmp = -1;
 		long long rectmp = -1;	
 		sprintf(fid, DFID, PFID(lu_fid));
  		llapi_fid2path(fsname, fid, path, 4096, &rectmp, &lnktmp);
