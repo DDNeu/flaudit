@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/67744347/191753483-5bf7a14b-99e2-463b-8aa0-18b822a1786a.png)
 
 #### [TL/DR] Test summary
-go to [test results](https://)
+go to [test results](#lustre-io-performance-impact-summary)
  
 ## Test details
 - Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/blob/main/PERFORMANCE.md#io-type-percentages)**
