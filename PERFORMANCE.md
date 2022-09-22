@@ -34,8 +34,10 @@ Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
 #### Lustre IO performance impact details
 ![image](https://user-images.githubusercontent.com/67744347/191757100-8b534843-cf3d-4459-96c3-bfa93646892b.png)
 
-
 #### Changelog consumption summary
+![image](https://user-images.githubusercontent.com/67744347/191759236-b32a7056-3c17-44c6-b7b7-fa992b3b9972.png)
+
+![image](https://user-images.githubusercontent.com/67744347/191759330-689195c6-7d4c-4a6d-bd6e-f6976f10a8ed.png)
 
 ## Specstorage parameters
 
@@ -81,4 +83,4 @@ Custom2_percent	 | 	0
 
 Homepage
 ---------------
-back to [Homepage](README.md) 
+back to [Homepage](https://github.com/DDNeu/flaudit)
