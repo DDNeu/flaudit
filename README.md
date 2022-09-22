@@ -145,8 +145,9 @@ To enable `flauditd` at boot time, use:
 $ systemctl enable flauditd
 ```
 
-[Performance](PERFORMANCE.md)
+Performance
 ---------------
+Go to [Performance page](PERFORMANCE.md) 
 
 Development
 ---------------
