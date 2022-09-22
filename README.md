@@ -145,6 +145,10 @@ To enable `flauditd` at boot time, use:
 $ systemctl enable flauditd
 ```
 
+Performance
+---------------
+[dedicated page](PERF.md)
+
 Development
 ---------------
 - `make install` and `make rpm` are not yet available :)
