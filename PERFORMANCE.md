@@ -1,17 +1,12 @@
 
-## Test infrastructure
+## Test summary
 ![image](https://user-images.githubusercontent.com/67744347/191753483-5bf7a14b-99e2-463b-8aa0-18b822a1786a.png)
 
-#### [TL/DR] Test summary - performance impact
-Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
---- | :---: | :---: | :---: | :---:
- **no-changelog** | 0,0% | 0,0% | 0,0% | 0,0%
- **changelog-only** | -7,4% | 8,5% | -7,4% | -7,3%
- **flaudit-nopath (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
- **flaudit (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
+#### [TL/DR] Test summary
+go to [test results](https://)
  
 ## Test details
-- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/blob/main/PERFORMANCE.md#specstorage-io-type-percentages)**
+- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/blob/main/PERFORMANCE.md#io-type-percentages)**
 - Number of runs: **792**
 - Total runtime: **66 hours**
 
@@ -26,14 +21,31 @@ flaudit-10 | flaudit buffer size 10 records
 flaudit-100 | flaudit buffer size 100 records	
 flaudit-1000 | flaudit buffer size 1000 records	
 
- 
+## Test results
+
+#### Lustre IO performance impact summary
+Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
+--- | :---: | :---: | :---: | :---:
+ **no-changelog** | 0,0% | 0,0% | 0,0% | 0,0%
+ **changelog-only** | -7,4% | 8,5% | -7,4% | -7,3%
+ **flaudit-nopath (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
+ **flaudit (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
+
+#### Lustre IO performance impact details
+![image](https://user-images.githubusercontent.com/67744347/191757100-8b534843-cf3d-4459-96c3-bfa93646892b.png)
+
+
+#### Changelog consumption summary
+
+## Specstorage parameters
+
 #### Run details
 - Instances: 1
 - File_size: 16k
 - Dir_count: 10
 - Files_per_dir: 50
 
-#### Specstorage IO type percentages
+#### IO type percentages
 
 IO Type | %
 --- | --- 	
