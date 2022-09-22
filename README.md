@@ -15,7 +15,7 @@ Copy `flaudit` directory in `/opt/ddn/`
 $ mkdir -p /opt/ddn/
 $ cp -a flaudit /opt/ddn/
 ```
-and skip to [running flaudit](https://github.com/DDNeu/flaudit#running-flaudit)
+and skip to [running flaudit](#running-flaudit)
 
 #### Source:
 
