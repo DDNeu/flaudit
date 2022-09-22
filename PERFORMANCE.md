@@ -11,7 +11,7 @@ Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
  **flaudit (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
  
 ## Test details
-- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/new/PERFORMANCE.md#specstorage-io-type-percentages)**
+- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/blob/main/PERFORMANCE.md#specstorage-io-type-percentages)**
 - Number of runs: **792**
 - Total runtime: **66 hours**
 
