@@ -1,9 +1,17 @@
 
 ## Test infrastructure
+![image](https://user-images.githubusercontent.com/67744347/191753483-5bf7a14b-99e2-463b-8aa0-18b822a1786a.png)
 
-
-## Test run
-- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/new/main#specstorage-swbuild-custom-parameters)**
+#### [TL/DR] Test summary - performance impact
+Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
+--- | :---: | :---: | :---: | :---:
+ **no-changelog** | 0,0% | 0,0% | 0,0% | 0,0%
+ **changelog-only** | -7,4% | 8,5% | -7,4% | -7,3%
+ **flaudit-nopath (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
+ **flaudit (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
+ 
+## Test details
+- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/new/PERFORMANCE.md#specstorage-io-type-percentages)**
 - Number of runs: **792**
 - Total runtime: **66 hours**
 
@@ -18,18 +26,7 @@ flaudit-10 | flaudit buffer size 10 records
 flaudit-100 | flaudit buffer size 100 records	
 flaudit-1000 | flaudit buffer size 1000 records	
 
-
-
-Case overhead | IOPS % | Latency % | Read throughput % | Write throughput %
---- | :---: | :---: | :---: | :---:
- **no-changelog** | 0,0% | 0,0% | 0,0% | 0,0%
- **changelog-only** | -7,4% | 8,5% | -7,4% | -7,3%
- **flaudit-nopath (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
- **flaudit (AVG)** | -7,5% | 8,6% | -7,2% | -7,3%
  
- 
-## Specstorage SWBUILD custom parameters
-
 #### Run details
 - Instances: 1
 - File_size: 16k
