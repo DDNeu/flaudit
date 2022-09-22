@@ -6,7 +6,7 @@
 go to [test results](#lustre-io-performance-impact-summary)
  
 ## Test details
-- Test type: **[specstorage SWBUILD (customized)](https://github.com/DDNeu/flaudit/blob/main/PERFORMANCE.md#io-type-percentages)**
+- Test type: **[specstorage SWBUILD (customized)](#io-type-percentages)**
 - Number of runs: **792**
 - Total runtime: **66 hours**
 
