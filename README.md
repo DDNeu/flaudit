@@ -1,4 +1,4 @@
-flaudit
+Flaudit
 -------
 
 `flaudit` consumes Lustre Changelogs using liblustreapi and writes output in json. Based on [stanford-rc/lauditd](https://github.com/stanford-rc/lauditd)
