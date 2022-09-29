@@ -54,7 +54,7 @@
 enum flaudit_enqueue_status
 {
     FLAUDIT_ENQUEUE_SUCCESS = 0, /* read/write success and more to process */
-        FLAUDIT_ENQUEUE_READER_FAILURE = 1, /* changelog reader failure (or EOF) */
+    FLAUDIT_ENQUEUE_READER_FAILURE = 1, /* changelog reader failure (or EOF) */
 };
 
 static int TerminateSig;
@@ -184,7 +184,7 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
         if (!fid_is_zero(&rnm->cr_sfid))
         {
             recno = -1;
-			fid2path(fsname, &rnm->cr_spfid, &recno, path);
+            fid2path(fsname, &rnm->cr_spfid, &recno, path);
             rc = snprintf(linebufptr, linebuflen,
                 ",\"source\":\""
                 DFID "\",\"source_parent\":\""
