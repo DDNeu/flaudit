@@ -47,6 +47,7 @@
 #endif
 
 #define IGNORE_TYPES_H_MAX 30               /* > max number of changelogs types */
+#define PATH_MAX 4096
 
 enum flaudit_enqueue_status {
     FLAUDIT_ENQUEUE_SUCCESS = 0,            /* read/write success and more to process */
@@ -70,9 +71,8 @@ static void fid2path(const char *fsname, struct lu_fid *lu_fid, __u64 *rectmp, c
 {
                 char fid[32];
                 int lnktmp = 0;
-				path = calloc(1, 4096);
                 sprintf(fid, DFID, PFID(lu_fid));
-                llapi_fid2path(fsname, fid, path, 4096, rectmp, &lnktmp);
+                llapi_fid2path(fsname, fid, path, PATH_MAX, rectmp, &lnktmp);
 }
 
 
@@ -102,15 +102,17 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
     char       *linebufptr;
     int         linebuflen;
     char        linebuf[8192];
-    char        *path;
+    char       *path;
 // COLAVINCENZO extract fsname from device, TODO search for a lustreapi call
-        char       *fsname = strtok(strdup(device), "-");
-        char            user[32];
-        char            group[32];
+    char       *fsname = strtok(strdup(device), "-");
+    char        user[32];
+    char        group[32];
 
+	
+    path = calloc(1, 4096);
     linebufptr = linebuf;
     linebuflen = sizeof(linebuf);
-
+    
     secs = rec->cr_time >> 30;
     localtime_r(&secs, &ts);
 
@@ -206,6 +208,7 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
         fflush(stdout);
         // COLAVINCENZO cleanup fsname
         free(fsname);
+	free(path);
     return (rc < 0) ? 1 : 0;
 error:
     fprintf(stderr, "FATAL: line buffer overflow (%s)\n", strerror(errno));
