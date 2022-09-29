@@ -5,6 +5,19 @@ if [[ $# -ne 2 ]] ; then
 fi
 
 BINDIR=/opt/ddn/flaudit
+FLAUDIT=$BINDIR/flaudit
+#FLAUDIT=$BINDIR/flaudit-nopath
 USER=$1
 MDT=$2
-$BINDIR/flaudit -u "$USER" "$MDT" | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
+
+# Sizing rule of thumb for changelog records processed by flaudit: 350KiB every 1000 flaudit records.
+# Increase fluent-bit input plugin batch size according to flaudit batch size parameter (number of records):
+BATCHSIZE=100
+
+# write data to elasticsearch
+#$FLAUDIT -b ${BATCHSIZE} -u "$USER" "$MDT" | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
+$FLAUDIT -b "$BATCHSIZE" -u "$USER" "$MDT" | tee -a /var/log/flaudit.log | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
+
+# write data to file
+#echo >/var/log/flaudit.log
+#$FLAUDIT  -b ${BATCHSIZE} -u "$USER" "$MDT" >> /var/log/flaudit.log
