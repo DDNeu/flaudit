@@ -72,12 +72,12 @@ static void flaudit_sigterm(int signo)
 // COLAVINCENZO fid2path to be checked
 static void fid2path(const char *fsname, struct lu_fid *lu_fid, char *path)
 {
-		char fid[32];
-		int lnktmp = 0;
-		// COLAVINCENZO rectmp should be changelog record number rec->cr_index type __u64 unsigned long long 
-		long long rectmp = -1;	
-		sprintf(fid, DFID, PFID(lu_fid));
- 		llapi_fid2path(fsname, fid, path, PATH_MAX, &rectmp, &lnktmp);
+                char fid[32];
+                int lnktmp = 0;
+                // COLAVINCENZO rectmp should be changelog record number rec->cr_index type __u64 unsigned long long
+                long long rectmp = -1;
+                sprintf(fid, DFID, PFID(lu_fid));
+                llapi_fid2path(fsname, fid, path, PATH_MAX, &rectmp, &lnktmp);
 }
 
 
@@ -88,12 +88,12 @@ static void res_uidgid (const int uid, const int gid, char *user, char *group)
      struct group *grp;
 
      if ((pwd = getpwuid(uid)) != NULL)
-	 sprintf(user, "%s", pwd->pw_name);
+         sprintf(user, "%s", pwd->pw_name);
      else
         sprintf(user, "%s", uid);
 
      if ((grp = getgrgid(gid)) != NULL)
-	 sprintf(group, "%s", grp->gr_name);
+         sprintf(group, "%s", grp->gr_name);
      else
         sprintf(group, "%s", gid);
 }
@@ -108,11 +108,11 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
     int         linebuflen;
     char        linebuf[8192];
 // COLAVINCENZO fixed size buffer for fid2path
-	char        path[PATH_MAX];
+        char        path[PATH_MAX];
 // COLAVINCENZO extract fsname from device, search for a lustreapi call
-	char       *fsname = strtok(strdup(device), "-");
-	char		user[32];
-	char		group[32];
+        char       *fsname = strtok(strdup(device), "-");
+        char            user[32];
+        char            group[32];
 
     linebufptr = linebuf;
     linebuflen = sizeof(linebuf);
@@ -122,7 +122,7 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
 
     strftime(buf, sizeof(buf), "%s", &ts);
     rc = snprintf(linebufptr, linebuflen, "[%s.%06d,{\"mdt\":\"%s\",\"id\":\"%llu\",\"type\":\"%-5s\",\"flags\":\"0x%x\"",
-				 buf,(int)(rec->cr_time & ((1 << 30) - 1)),
+                                 buf,(int)(rec->cr_time & ((1 << 30) - 1)),
                  device, rec->cr_index, changelog_type2str(rec->cr_type),
                  rec->cr_flags & CLF_FLAGMASK);
     if (rc < 0 || rc >= linebuflen)
@@ -133,8 +133,8 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
 
     if (rec->cr_flags & CLF_EXTRA_FLAGS) {
         struct changelog_ext_uidgid *uidgid = changelog_rec_uidgid(rec);
-		// COLAVINCENZO resolve UID/GID
-		res_uidgid (uidgid->cr_uid, uidgid->cr_gid, user, group);
+                // COLAVINCENZO resolve UID/GID
+                res_uidgid (uidgid->cr_uid, uidgid->cr_gid, user, group);
         rc = snprintf(linebufptr, linebuflen, ",\"uid\":\"%llu\",\"gid\":\"%llu\",\"user\":\"%s\",\"group\":\"%s\"",
                       uidgid->cr_uid, uidgid->cr_gid, user, group);
         if (rc < 0 || rc >= linebuflen)
@@ -157,7 +157,7 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
 // COLAVINCENZO "fix" NIDs never show up
 //    if (rec->cr_flags & CLFE_NID) {
     if (rec->cr_flags ) {
-        struct changelog_ext_nid *nid = changelog_rec_nid(rec); 
+        struct changelog_ext_nid *nid = changelog_rec_nid(rec);
         libcfs_nid2str_r(nid->cr_nid, buf);
         rc = snprintf(linebufptr, linebuflen, ",\"nid\":\"%s\"", buf);
         if (rc < 0 || rc >= linebuflen)
@@ -165,9 +165,10 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
         linebufptr += rc;
         linebuflen -= rc;
     }
+        // COLAVINCENZO added changelog_rec_name(rec) -- and then removed, bad output.
+    //rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%s\"", PFID(&rec->cr_tfid), changelog_rec_name(rec));
+        rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\"", PFID(&rec->cr_tfid));
 
-    rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%s\"", PFID(&rec->cr_tfid), changelog_rec_name(rec));
-	// COLAVINCENZO added changelog_rec_name(rec)
     if (rc < 0 || rc >= linebuflen)
         goto error;
     linebufptr += rc;
@@ -176,12 +177,13 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
     if (rec->cr_flags & CLF_RENAME) {
         struct changelog_ext_rename *rnm;
         rnm = changelog_rec_rename(rec);
-		// COLAVINCENZO added source_parent_name via fid2path
+                // COLAVINCENZO added source_parent_name via fid2path
         if (!fid_is_zero(&rnm->cr_sfid)) {
-			fid2path(fsname, &rnm->cr_spfid, path);
+                        fid2path(fsname, &rnm->cr_spfid, path);
             rc = snprintf(linebufptr, linebuflen,
                           ",\"source\":\""DFID"\",\"source_parent\":\""DFID"\",\"source_name\":\"%.*s\",\"source_parent_name\":\"%s\"",
                          PFID(&rnm->cr_sfid), PFID(&rnm->cr_spfid), changelog_rec_snamelen(rec), changelog_rec_sname(rec), path);
+                        memset(path,0,PATH_MAX);
             if (rc < 0 || rc >= linebuflen)
                 goto error;
             linebufptr += rc;
@@ -190,25 +192,26 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
     }
 
     if (rec->cr_namelen) {
-		// COLAVINCENZO added parent_name via fid2path, change label "name" to "target_name"
-		fid2path(fsname, &rec->cr_pfid, path);
-		rc = snprintf(linebufptr, linebuflen, ",\"parent\":\""DFID"\",\"target_name\":\"%.*s\",\"parent_name\":\"%s\"",
+                // COLAVINCENZO added parent_name via fid2path, change label "name" to "target_name"
+                fid2path(fsname, &rec->cr_pfid, path);
+                rc = snprintf(linebufptr, linebuflen, ",\"parent\":\""DFID"\",\"target_name\":\"%.*s\",\"parent_name\":\"%s\"",
                       PFID(&rec->cr_pfid), rec->cr_namelen, changelog_rec_name(rec), path);
+                memset(path,0,PATH_MAX);
         if (rc < 0 || rc >= linebuflen)
             goto error;
         linebufptr += rc;
         linebuflen -= rc;
     }
-	// COLAVINCENZO added \r for stdout
+        // COLAVINCENZO added \r for stdout
     rc = snprintf(linebufptr, linebuflen, "}]\n\r");
     if (rc < 0 || rc >= linebuflen)
         goto error;
 
-	rc = fprintf(stdout, "%s", linebuf);
-	// COLAVINCENZO fflush for stdout 
-	fflush(stdout);
-	// COLAVINCENZO cleanup fsname
-	free(fsname);
+        rc = fprintf(stdout, "%s", linebuf);
+        // COLAVINCENZO fflush for stdout
+        fflush(stdout);
+        // COLAVINCENZO cleanup fsname
+        free(fsname);
     return (rc < 0) ? 1 : 0;
 error:
     fprintf(stderr, "FATAL: line buffer overflow (%s)\n", strerror(errno));
@@ -246,7 +249,7 @@ static int flaudit_enqueue(const char *device, int batch_size, long long *recpos
 
         e.key = (char *)changelog_type2str(rec->cr_type);
 
-		flaudit_writerec(device, rec);
+                flaudit_writerec(device, rec);
 
         *recpos = rec->cr_index;
 
@@ -378,8 +381,8 @@ int main(int ac, char **av)
                         recpos, rc);
             }
         }
-		
-		if (TerminateSig) {
+
+                if (TerminateSig) {
 
             break;
         }
