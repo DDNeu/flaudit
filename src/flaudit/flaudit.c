@@ -166,8 +166,8 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
         linebufptr += rc;
         linebuflen -= rc;
     }
-    strcpy(path,changelog_rec_name(rec));
-    rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%s\"", PFID(&rec->cr_tfid), path);
+    //strcpy(path,changelog_rec_name(rec));
+    rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%.*s\"", PFID(&rec->cr_tfid), changelog_rec_name(rec));
 
     if (rc < 0 || rc >= linebuflen)
         goto error;
