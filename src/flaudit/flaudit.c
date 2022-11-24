@@ -69,7 +69,7 @@ static void flaudit_sigterm(int signo)
     TerminateSig = 1;
 }
 
-// COLAVINCENZO fid2path to be checked
+// COLAVINCENZO fid2path
 static void fid2path(const char *fsname, struct lu_fid *lu_fid, __u64 *rectmp, char *path)
 {
     char fid[32];
@@ -166,10 +166,8 @@ static int flaudit_writerec(const char *device, struct changelog_rec *rec)
         linebufptr += rc;
         linebuflen -= rc;
     }
-    // COLAVINCENZO added changelog_rec_name(rec) -- and then removed, bad output.
-    //rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%s\"", PFID(&rec->cr_tfid), changelog_rec_name(rec));
-    rc = snprintf(linebufptr, linebuflen, ",\"target\":\""
-        DFID "\"", PFID(&rec->cr_tfid));
+    strcpy(path,changelog_rec_name(rec));
+    rc = snprintf(linebufptr, linebuflen, ",\"target\":\""DFID"\",\"target_name\":\"%s\"", PFID(&rec->cr_tfid), path);
 
     if (rc < 0 || rc >= linebuflen)
         goto error;
