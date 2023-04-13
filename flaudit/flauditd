@@ -15,8 +15,9 @@ MDT=$2
 BATCHSIZE=100
 
 # write data to elasticsearch
-#$FLAUDIT -b ${BATCHSIZE} -u "$USER" "$MDT" | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
-$FLAUDIT -b "$BATCHSIZE" -u "$USER" "$MDT" | tee -a /var/log/flaudit.log | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
+$FLAUDIT -b ${BATCHSIZE} -u "$USER" "$MDT" | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
+# also append to local log file (for debug purposes only!)
+#$FLAUDIT -b "$BATCHSIZE" -u "$USER" "$MDT" | tee -a /var/log/flaudit.log | $BINDIR/fluent-bit -c $BINDIR/fluent-bit.conf
 
 # write data to file
 #echo >/var/log/flaudit.log
